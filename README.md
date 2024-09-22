@@ -1,27 +1,98 @@
-# ChatGPTBot - Discord bot using OpenAI GPT-3.5
+# Discord Bot with Azure OpenAI Integration
 
-This is a Discord bot that uses the OpenAI GPT-3.5 language model to generate responses to messages sent to it. The bot listens for messages in Discord channels and responds to messages that start with `!bot`. It uses the previous 20 messages in the channel (up until a message containing the text `context block`) as input to the GPT-3.5 model to generate a response, which it sends back to the channel. The bot also responds to messages starting with `!pre` by setting a "presence" status on Discord to the text that follows `!pre`, and to messages starting with `!art` by generating an image using the OpenAI DALL-E 2 model.
+This project implements a Discord bot that uses Azure OpenAI services to generate responses and create images based on user interactions.
 
-## Getting started
+## Features
 
-To get started, you will need to have Python 3.7 or later installed, as well as valid API key for OpenAI and a Discord bot token. You can obtain an API key for OpenAI from the [OpenAI API website](https://beta.openai.com/docs/api-reference/introduction). To obtain a Discord bot token, you can follow the instructions in the [Discord Developer Portal](https://discord.com/developers/docs/intro).
+- Responds to user messages using Azure OpenAI's language models
+- Generates images based on text prompts
+- Dynamically adjusts its behavior based on conversation context
+- Allows setting a custom pre-prompt to guide the bot's responses
 
-Once you have obtained your API key and token, you can clone this repository to your local machine and install the required Python packages:<br>
+## Prerequisites
 
-$ git clone https://github.com/VeryG00dName/Discord_Chatbot.git<br>
-$ cd chatgptbot-discord<br>
-$ pip install -r requirements.txt<br>
+Before you begin, ensure you have met the following requirements:
 
-Next, you will need to set your OpenAI and Discord API keys as environment variables. You can do this by creating a new file named `.env` in the root directory of the project, and adding the following lines:
+- Python 3.7 or higher
+- An Azure account with an active subscription
+- Access to Azure OpenAI services (currently limited and requires approval)
+- A Discord account and a registered Discord application/bot
 
+## Installation
 
-discord-token = "your token"<br>
-openai-api = "your api"
+1. Clone this repository:
+   ```
+   git clone https://github.com/Ammaranjum/DiscordChatOpenAI.git
+   cd DISCORD_CHATBOT
+   ```
+
+2. Create a virtual environment and activate it:
+   ```
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows, use `.venv\Scripts\activate`
+   ```
+
+3. Install the required packages:
+   ```
+   pip install python-dotenv openai discord.py
+   ```
+
+## Configuration
+
+1. Create a `.env` file in the root directory of the project.
+
+2. Add the following environment variables to the `.env` file:
+   ```
+   AZURE_OPENAI_API_KEY=your_azure_openai_api_key_here
+   DISCORD_TOKEN=your_discord_bot_token_here
+   AZURE_OPENAI_ENDPOINT=https://your-resource-name.openai.azure.com/
+   OPENAI_API_VERSION=2023-05-15
+   ```
+
+   Replace the placeholder values with your actual Azure OpenAI API key, Discord bot token, and Azure OpenAI endpoint.
+
+3. Ensure your Azure OpenAI service has the necessary models deployed (e.g., GPT-4 for text generation, DALL-E for image generation).
+
+## Usage
+
+To start the bot, run:
+
+```
+python chatgpt_bot.py
+```
+
+The bot will now be online and ready to respond to messages in your Discord server.
+
+## Commands
+
+The bot doesn't use traditional command prefixes. Instead, it analyzes the conversation context to determine when and how to respond. You can interact with it in the following ways:
+
+- Ask questions or make statements in the Discord channel where the bot is present.
+- Request image generation by asking the bot to create or draw something.
+- Set a new pre-prompt by asking the bot to change its behavior or role.
+
+## Customization
+
+You can customize the bot's behavior by modifying the `pre_prompt` and `pre_pre_prompt` variables in the `ChatGPTBot` class.
+
+## Troubleshooting
+
+If you encounter any issues:
+
+1. Ensure all environment variables are correctly set in the `.env` file.
+2. Check that your Azure OpenAI service is properly set up and the endpoint is correct.
+3. Verify that your Discord bot token is valid and the bot has the necessary permissions in your server.
+4. Check the console output for any error messages when running the bot.
 
 ## Contributing
 
-Pull requests are welcome! If you would like to contribute to this project, please create a new branch for your changes and submit a pull request. 
+Contributions to this project are welcome. Please fork the repository and submit a pull request with your changes.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE.md](LICENSE) file for details.
+
+
+## Contact
+
+If you have any questions or feedback, please open an issue in this repository.
